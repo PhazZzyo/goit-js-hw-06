@@ -14,36 +14,32 @@ const images = [
 ];
 
 const galleryRef = document.querySelector('.gallery');
-galleryRef.classList.add('gallery-images');
+galleryRef.classList.add('gallery-list');
+// --- without function
 
-const image = document.createElement('img');
-image.src = imageLink;
-containerRef.append(Image);
-
-
-
-
-
-const galleryItems = item => {
-  const { url, alt } = item;
-  return `<li class="gallery-item">
-    <img src="${url}" alt="${alt}" class="gallery-image"></img>
-  </li>`;
-};
-
-const addGallaryListToMarckup = images.map(galleryList).join('');
-gallery.insertAdjacentHTML('afterbegin', addGallaryListToMarckup);
-
-
-
-
-
-// const ingredientsList = document.querySelector('#ingredients');
-// const listItems = ingredients.map(element => {
-//   const listItem = document.createElement('li');
-//   listItem.textContent = element;
-//   listItem.classList.add('item');
-//   return listItem;
+// const galleryItems = images.map(property => {
+// const imageRef = document.createElement('img');
+//   imageRef.src = property.url;
+//   imageRef.alt = property.alt;
+//   return imageRef;
 // });
 
-// ingredientsList.append(...listItems);
+// galleryRef.append(...galleryItems);
+
+// --- with function
+
+const makeGallery = (properties) => {
+  return properties.map(property => {
+    const itemRef = document.createElement('li');
+    itemRef.classList.add('gallery-item');
+    const imageRef = document.createElement('img');
+    imageRef.classList.add('gallery-img');
+    imageRef.src = property.url;
+    imageRef.alt = property.alt;    
+    itemRef.appendChild(imageRef);
+    return itemRef;
+  });  
+};
+
+const galleryItems = makeGallery(images);
+galleryRef.append(...galleryItems);
