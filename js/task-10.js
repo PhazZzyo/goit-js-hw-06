@@ -1,10 +1,22 @@
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-}
-
 const boxes = document.querySelector('#boxes');
 const create = document.querySelector('[data-create]');
 const destroy = document.querySelector('[data-destroy]');
+// let inputValue = document.querySelector('input'); // first variant
+
+create.addEventListener('click', () => {
+  // let quantity = +inputValue.value; // first variant
+  let quantity = create.previousElementSibling.value;
+  if (quantity === 0 || quantity > 100) { 
+    return alert('Incorrect value, please enter quantity in range of 1 - 100!');
+  }
+  createBoxes(quantity);
+});
+
+destroy.addEventListener('click', () => {
+  boxes.innerHTML = '';  
+  // inputValue.value = ''; // first variant
+  create.previousElementSibling.value = '';
+});
 
 const createBoxes = (quantity) => {  
   const element = document.createDocumentFragment();
@@ -16,23 +28,13 @@ const createBoxes = (quantity) => {
       div.style.height = `${size}px`;
       div.style.backgroundColor = `${getRandomHexColor()}`;
       element.appendChild(div);  
-      boxes.appendChild(element);
+      
       size += 10;
       counter += 1;
-}  
+    }
+  boxes.appendChild(element);
 };
 
-
-const destroyBoxes = () => { 
-  boxes.innerHTML = '';
+  const getRandomHexColor = () => {  
+  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
-
-create.addEventListener("click", () => {
-  let quantity = +document.querySelector('input[type=number]').value;
-  if (quantity === 0) { 
-    return alert("Incorrect value, please enter quantity that is bigger than 0!");
-  }
-  createBoxes(quantity);
-});
-
-destroy.addEventListener('click', destroyBoxes);
