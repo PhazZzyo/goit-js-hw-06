@@ -15,6 +15,7 @@ const images = [
 
 const galleryRef = document.querySelector('.gallery');
 galleryRef.classList.add('gallery-list');
+
 // --- without function
 
 // const galleryItems = images.map(property => {
