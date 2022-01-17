@@ -6,7 +6,7 @@ const destroy = document.querySelector('[data-destroy]');
 create.addEventListener('click', () => {
   // let quantity = +inputValue.value; // first variant
   let quantity = create.previousElementSibling.value;
-  if (quantity === 0 || quantity > 100) { 
+  if (quantity === '' || quantity > 100) { 
     return alert('Incorrect value, please enter quantity in range of 1 - 100!');
   }
   createBoxes(quantity);
